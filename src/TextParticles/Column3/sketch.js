@@ -14,17 +14,15 @@ export default function sketch(p){
   }
 
   p.setup = (
-    width= 300, 
-    height= 300, 
-    backgroundColor= '#ffffff',
-    left= 100, 
-    top= 300, 
-    pixelSize= 2,
-    borderSize=1,
-    maxSpeed= 10,
-    maxForce = 1,
-    arrive= 1,
-    flee= 5, 
+    width= 135, 
+    height= 280, 
+    backgroundColor= '#0d0d0d',
+    pixelSize= 2.5,
+    borderSize=0,
+    maxSpeed= 15,
+    maxForce = 1.5,
+    arrive= 2,
+    flee= 2.5, 
   ) => {
     fetch(file)
     .then((r) => r.text())
@@ -44,6 +42,7 @@ export default function sketch(p){
     }
     }).then(()=>{
       canvas = p.createCanvas(ow, oh)
+      p.background(backgroundColor);
       // canvas.parent('sketch-holder');
 
       for (var i = 0; i < points.length; i++) {
@@ -65,8 +64,8 @@ export default function sketch(p){
   }
 
   p.draw = (
-    backgroundColor= '#ffffff', 
-    color='#cccccc', 
+    backgroundColor= '#0d0d0d', 
+    color='#408033', 
     borderColor= '#000000', 
     arriveMouseDistance= 100, 
     fleeMouseDistance= 50,
@@ -77,10 +76,10 @@ export default function sketch(p){
     for (var i = 0; i < vehicles.length; i++){
       var v = vehicles[i]
 
-      let nx = 0
-      let ny = 0
-      // let nx = p.noise(i * 10.1 + p.frameCount * 0.01) * 10 - 5.0;
-      // let ny = p.noise(i * 10.2 + p.frameCount * 0.01) * 10 - 5.0;
+      // let nx = 0
+      // let ny = 0
+      let nx = p.noise(i * 10.1 + p.frameCount * 0.01) * 10 - 5.0;
+      let ny = p.noise(i * 10.2 + p.frameCount * 0.01) * 10 - 5.0;
 
       v.behaviors(p, arriveMouseDistance, fleeMouseDistance, timeToOriginalFormat, shake);
       v.update();
